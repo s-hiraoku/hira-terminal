@@ -37,13 +37,18 @@
         "icon": "$(add)"
       },
       {
-        "command": "hira-terminal.closeTerminal",
-        "title": "Close Terminal",
-        "icon": "$(close)"
+        "command": "hira-terminal.splitVertical",
+        "title": "Split Terminal (Vertical)",
+        "icon": "$(split-vertical)"
       },
       {
-        "command": "hira-terminal.clearTerminal",
-        "title": "Clear Terminal",
+        "command": "hira-terminal.killActiveTerminal",
+        "title": "Kill Active Terminal",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "hira-terminal.clearActiveTerminal",
+        "title": "Clear Active Terminal",
         "icon": "$(clear-all)"
       }
     ],
@@ -52,7 +57,22 @@
         {
           "command": "hira-terminal.newTerminal",
           "when": "view == hira-terminal.sidebarView",
-          "group": "navigation"
+          "group": "navigation@1"
+        },
+        {
+          "command": "hira-terminal.splitVertical",
+          "when": "view == hira-terminal.sidebarView && hiraTerminal.hasActiveTerminal",
+          "group": "navigation@2"
+        },
+        {
+          "command": "hira-terminal.killActiveTerminal",
+          "when": "view == hira-terminal.sidebarView && hiraTerminal.hasActiveTerminal",
+          "group": "navigation@3"
+        },
+        {
+          "command": "hira-terminal.clearActiveTerminal",
+          "when": "view == hira-terminal.sidebarView && hiraTerminal.hasActiveTerminal",
+          "group": "navigation@4"
         }
       ]
     },

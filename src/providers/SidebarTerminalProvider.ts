@@ -42,6 +42,9 @@ export class SidebarTerminalProvider implements vscode.WebviewViewProvider {
         case 'resizeTerminal':
           this._terminalManager.resizeTerminal(message.terminalId, message.cols, message.rows);
           break;
+        case 'setActiveTerminal':
+          this._terminalManager.setActiveTerminal(message.terminalId);
+          break;
       }
     });
 

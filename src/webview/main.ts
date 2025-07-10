@@ -94,6 +94,14 @@ class TerminalWebview {
       });
     });
 
+    // Handle focus (set as active terminal)
+    terminal.onFocus(() => {
+      vscode.postMessage({
+        command: 'setActiveTerminal',
+        terminalId: terminalId
+      });
+    });
+
     // Store terminal
     this.terminals.set(terminalId, terminal);
     this.activeTerminalId = terminalId;

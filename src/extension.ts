@@ -38,14 +38,20 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('hira-terminal.closeTerminal', (terminalId: string) => {
-      terminalManager.closeTerminal(terminalId);
+    vscode.commands.registerCommand('hira-terminal.splitVertical', () => {
+      terminalManager.splitActiveTerminalVertical();
     })
   );
 
   context.subscriptions.push(
-    vscode.commands.registerCommand('hira-terminal.clearTerminal', (terminalId: string) => {
-      terminalManager.clearTerminal(terminalId);
+    vscode.commands.registerCommand('hira-terminal.killActiveTerminal', () => {
+      terminalManager.killActiveTerminal();
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand('hira-terminal.clearActiveTerminal', () => {
+      terminalManager.clearActiveTerminal();
     })
   );
 }
