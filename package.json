@@ -1,0 +1,112 @@
+{
+  "name": "hira-terminal",
+  "displayName": "Hira Terminal",
+  "description": "VS Code extension for managing multiple terminal instances in a sidebar",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "hira-terminal-container",
+          "title": "Hira Terminal",
+          "icon": "$(terminal)"
+        }
+      ]
+    },
+    "views": {
+      "hira-terminal-container": [
+        {
+          "type": "webview",
+          "id": "hira-terminal.sidebarView",
+          "name": "Terminal Sessions",
+          "icon": "$(terminal)",
+          "contextualTitle": "Hira Terminal"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "hira-terminal.newTerminal",
+        "title": "New Terminal",
+        "icon": "$(add)"
+      },
+      {
+        "command": "hira-terminal.closeTerminal",
+        "title": "Close Terminal",
+        "icon": "$(close)"
+      },
+      {
+        "command": "hira-terminal.clearTerminal",
+        "title": "Clear Terminal",
+        "icon": "$(clear-all)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "hira-terminal.newTerminal",
+          "when": "view == hira-terminal.sidebarView",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Hira Terminal",
+      "properties": {
+        "hira-terminal.defaultShell": {
+          "type": "string",
+          "default": "",
+          "description": "Default shell to use for new terminals (leave empty to use system default)"
+        },
+        "hira-terminal.fontSize": {
+          "type": "number",
+          "default": 14,
+          "description": "Terminal font size"
+        },
+        "hira-terminal.fontFamily": {
+          "type": "string",
+          "default": "Menlo, Monaco, 'Courier New', monospace",
+          "description": "Terminal font family"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.0.5",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "node-pty": "^0.10.1",
+    "xterm": "^5.1.0",
+    "xterm-addon-fit": "^0.7.0",
+    "xterm-addon-web-links": "^0.8.0"
+  }
+}
