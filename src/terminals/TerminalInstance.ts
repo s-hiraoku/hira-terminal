@@ -1,8 +1,8 @@
-import { IPty } from 'node-pty';
 import { TerminalConfig } from '../types/terminal';
+import { MockIPty } from './MockPTY';
 
 export class TerminalInstance {
-  private _pty?: IPty;
+  private _pty?: MockIPty;
   private _isDisposed = false;
 
   constructor(
@@ -10,7 +10,7 @@ export class TerminalInstance {
     public readonly config: TerminalConfig
   ) {}
 
-  public setPTY(pty: IPty): void {
+  public setPTY(pty: MockIPty): void {
     if (this._isDisposed) {
       return;
     }
@@ -57,7 +57,7 @@ export class TerminalInstance {
     return this._isDisposed;
   }
 
-  public get pty(): IPty | undefined {
+  public get pty(): MockIPty | undefined {
     return this._pty;
   }
 }
